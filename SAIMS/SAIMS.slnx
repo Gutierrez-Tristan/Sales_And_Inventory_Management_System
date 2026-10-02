@@ -1,6 +1,6 @@
 <Solution>
   <Project Path="SAIMS/SAIMS.csproj" />
-  <Project Path="SAIMSDatabase/SAIMSDatabase.sqlproj">
+  <Project Path="SAIMSDatabase/SAIMSDatabase.sqlproj" Id="5e02f04f-1e3a-40ca-a078-458a46c19862">
     <Build />
     <Deploy />
   </Project>
