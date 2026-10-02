@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="SAIMS/SAIMS.csproj" />
+  <Project Path="SAIMSDatabase/SAIMSDatabase.sqlproj">
+    <Build />
+    <Deploy />
+  </Project>
+</Solution>
