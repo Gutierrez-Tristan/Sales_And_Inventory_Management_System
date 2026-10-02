@@ -4,5 +4,17 @@
     <Compile Update="UI\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\POS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Profile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Stock Inquiry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Transaction.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 </Project>
