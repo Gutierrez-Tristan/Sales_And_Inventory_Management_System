@@ -99,5 +99,35 @@ namespace SAIMS.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap google_search_magnifying_glass_icon_21 {
+            get {
+                object obj = ResourceManager.GetObject("google-search-magnifying-glass-icon-21", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap pngtree_magnifying_glass_line_icon_png_image_9118660 {
+            get {
+                object obj = ResourceManager.GetObject("pngtree-magnifying-glass-line-icon-png-image_9118660", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap shopping_cart_icon_md {
+            get {
+                object obj = ResourceManager.GetObject("shopping-cart-icon-md", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
