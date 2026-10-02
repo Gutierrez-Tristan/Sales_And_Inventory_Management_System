@@ -7,10 +7,19 @@
     <Compile Update="UI\CashierDashboard.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\Category.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\Logout.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI\POS.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Products.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Profile.cs">
@@ -18,6 +27,9 @@
     </Compile>
     <Compile Update="UI\StockInquiry.cs">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Supplier.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Update="UI\Transaction.cs">
       <SubType>Form</SubType>
