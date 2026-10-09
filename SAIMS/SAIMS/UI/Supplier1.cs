@@ -8,19 +8,14 @@ using System.Windows.Forms;
 
 namespace SAIMS.UI
 {
-    public partial class Products : Form
+    public partial class Supplier1 : Form
     {
-        public Products()
+        public Supplier1()
         {
             InitializeComponent();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void button5_Click(object sender, EventArgs e)
+        private void panel3_Paint(object sender, PaintEventArgs e)
         {
 
         }

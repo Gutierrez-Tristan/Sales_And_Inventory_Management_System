@@ -14,5 +14,26 @@ namespace SAIMS.UI
         {
             InitializeComponent();
         }
+
+        private void btnCategories_Click(object sender, EventArgs e)
+        {
+            using var form = new Category();
+            form.ShowDialog();
+        }
+
+        private void AdminDashboard_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnTotalSales_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnProfile_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -10,7 +10,13 @@
     <Compile Update="UI\Category.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="UI\CreateCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="UI\Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\Login.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Logout.cs">
@@ -30,6 +36,12 @@
     </Compile>
     <Compile Update="UI\Supplier.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="UI\Supplier1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="UI\SupplierPopUp.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Update="UI\Transaction.cs">
       <SubType>Form</SubType>
