@@ -4,9 +4,9 @@ using SAIMS.UI;
 
 namespace SAIMS
 {
-    public partial class Form1 : Form
+    public partial class Login : Form
     {
-        public Form1()
+        public Login()
         {
             InitializeComponent();
         }
@@ -14,7 +14,7 @@ namespace SAIMS
         private void btnLogin_Click(object sender, EventArgs e)
         {
             UserController controller = new UserController();
-            UserModel user = controller.Login(txtUsername.Text.Trim(), txtPassword.Text.Trim());
+            UserModel user = controller.Login(txtUsername.Text.Trim(), txtUsername.Text.Trim());
 
             if (user != null)
             {
@@ -42,12 +42,12 @@ namespace SAIMS
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void Login_Load(object sender, EventArgs e)
         {
             txtPassword.PasswordChar = '•';
         }
 
-        private void lnkSigUp_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void panel2_Paint(object sender, PaintEventArgs e)
         {
 
         }

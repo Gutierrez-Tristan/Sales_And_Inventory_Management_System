@@ -1,6 +1,6 @@
 ﻿namespace SAIMS
 {
-    partial class Form1
+    partial class Login
     {
         /// <summary>
         ///  Required designer variable.
@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
+            label6 = new Label();
             pictureBoxLogo = new PictureBox();
             label5 = new Label();
             panel2 = new Panel();
@@ -46,22 +47,34 @@
             // panel1
             // 
             panel1.BackColor = Color.OrangeRed;
+            panel1.Controls.Add(label6);
             panel1.Controls.Add(pictureBoxLogo);
             panel1.Controls.Add(label5);
             panel1.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
             panel1.Location = new Point(-1, -1);
             panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(319, 742);
+            panel1.Size = new Size(236, 740);
             panel1.TabIndex = 0;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label6.ForeColor = Color.White;
+            label6.Location = new Point(48, 248);
+            label6.Name = "label6";
+            label6.Size = new Size(125, 25);
+            label6.TabIndex = 2;
+            label6.Text = "LOGO NAME";
             // 
             // pictureBoxLogo
             // 
             pictureBoxLogo.Image = Properties.Resources.ddd;
-            pictureBoxLogo.Location = new Point(58, 112);
+            pictureBoxLogo.Location = new Point(32, 100);
             pictureBoxLogo.Margin = new Padding(3, 2, 3, 2);
             pictureBoxLogo.Name = "pictureBoxLogo";
-            pictureBoxLogo.Size = new Size(239, 219);
+            pictureBoxLogo.Size = new Size(171, 139);
             pictureBoxLogo.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBoxLogo.TabIndex = 1;
             pictureBoxLogo.TabStop = false;
@@ -71,7 +84,7 @@
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 16.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label5.ForeColor = Color.White;
-            label5.Location = new Point(103, 70);
+            label5.Location = new Point(32, 60);
             label5.Name = "label5";
             label5.Size = new Size(153, 30);
             label5.TabIndex = 0;
@@ -87,21 +100,22 @@
             panel2.Controls.Add(txtPassword);
             panel2.Controls.Add(txtUsername);
             panel2.Font = new Font("Segoe UI Light", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            panel2.Location = new Point(317, 0);
+            panel2.Location = new Point(232, -1);
             panel2.Margin = new Padding(3, 2, 3, 2);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1040, 736);
+            panel2.Size = new Size(1366, 768);
             panel2.TabIndex = 1;
+            panel2.Paint += panel2_Paint;
             // 
             // btnLogin
             // 
             btnLogin.BackColor = Color.OrangeRed;
-            btnLogin.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnLogin.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             btnLogin.ForeColor = Color.White;
-            btnLogin.Location = new Point(433, 531);
+            btnLogin.Location = new Point(192, 267);
             btnLogin.Margin = new Padding(3, 2, 3, 2);
             btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(189, 55);
+            btnLogin.Size = new Size(189, 39);
             btnLogin.TabIndex = 5;
             btnLogin.Text = "LOGIN";
             btnLogin.UseVisualStyleBackColor = false;
@@ -110,52 +124,50 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold);
-            label3.Location = new Point(327, 395);
+            label3.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.Location = new Point(83, 187);
             label3.Name = "label3";
-            label3.Size = new Size(115, 32);
+            label3.Size = new Size(67, 19);
             label3.TabIndex = 4;
             label3.Text = "Password";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI Semibold", 18F, FontStyle.Bold);
-            label2.Location = new Point(327, 287);
+            label2.Font = new Font("Segoe UI", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Location = new Point(83, 128);
             label2.Name = "label2";
-            label2.Size = new Size(124, 32);
+            label2.Size = new Size(71, 19);
             label2.TabIndex = 3;
             label2.Text = "Username";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 27.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(455, 198);
+            label1.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(231, 75);
             label1.Name = "label1";
-            label1.Size = new Size(145, 50);
+            label1.Size = new Size(99, 37);
             label1.TabIndex = 2;
-            label1.Text = "LOGIN ";
+            label1.Text = "LOGIN";
             // 
             // txtPassword
             // 
-            txtPassword.Font = new Font("Arial", 18F);
-            txtPassword.Location = new Point(323, 433);
+            txtPassword.Location = new Point(83, 207);
             txtPassword.Margin = new Padding(3, 2, 3, 2);
             txtPassword.Name = "txtPassword";
-            txtPassword.Size = new Size(400, 35);
+            txtPassword.Size = new Size(400, 21);
             txtPassword.TabIndex = 1;
             // 
             // txtUsername
             // 
-            txtUsername.Font = new Font("Arial", 18F);
-            txtUsername.Location = new Point(323, 325);
+            txtUsername.Location = new Point(83, 147);
             txtUsername.Margin = new Padding(3, 2, 3, 2);
             txtUsername.Name = "txtUsername";
-            txtUsername.Size = new Size(400, 35);
+            txtUsername.Size = new Size(400, 21);
             txtUsername.TabIndex = 0;
             // 
-            // Form1
+            // Login
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -164,9 +176,9 @@
             Controls.Add(panel2);
             Controls.Add(panel1);
             Margin = new Padding(3, 2, 3, 2);
-            Name = "Form1";
+            Name = "Login";
             Text = "Form1";
-            Load += Form1_Load;
+            Load += Login_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBoxLogo).EndInit();
@@ -175,7 +187,7 @@
             ResumeLayout(false);
         }
 
-        private Form1 NewMethod()
+        private Login NewMethod()
         {
             return this;
         }
@@ -193,5 +205,6 @@
         private Label label5;
         private LinkLabel linkLabel1;
         private PictureBox pictureBoxLogo;
+        private Label label6;
     }
 }

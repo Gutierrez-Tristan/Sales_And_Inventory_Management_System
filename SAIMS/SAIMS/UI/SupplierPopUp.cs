@@ -8,22 +8,11 @@ using System.Windows.Forms;
 
 namespace SAIMS.UI
 {
-    public partial class Supplier : UserControl
+    public partial class SupplierPopUp : Form
     {
-        public Supplier()
+        public SupplierPopUp()
         {
             InitializeComponent();
         }
-
-        private void panel3_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-
-        }
     }
-
 }
