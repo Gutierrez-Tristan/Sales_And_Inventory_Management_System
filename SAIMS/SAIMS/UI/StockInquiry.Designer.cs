@@ -28,229 +28,214 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StockInquiry));
             panel1 = new Panel();
+            btnLogout = new Button();
+            btnStockInquiry = new Button();
+            btnTransaction = new Button();
+            btnPOS = new Button();
+            btnDashboard = new Button();
+            label2 = new Label();
             pictureBox1 = new PictureBox();
             label1 = new Label();
-            button1 = new Button();
-            button2 = new Button();
-            button3 = new Button();
-            button4 = new Button();
-            button5 = new Button();
-            button6 = new Button();
-            dataGridView1 = new DataGridView();
-            Column1 = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
-            Column4 = new DataGridViewTextBoxColumn();
-            Column5 = new DataGridViewTextBoxColumn();
-            textBox1 = new TextBox();
-            pictureBox2 = new PictureBox();
-            label2 = new Label();
+            txtSearch = new TextBox();
+            dgvStock = new DataGridView();
+            btnRefresh = new Button();
+            cboStatus = new ComboBox();
+            lblSummary = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvStock).BeginInit();
             SuspendLayout();
             // 
             // panel1
             // 
-            panel1.BackColor = Color.DarkOrange;
-            panel1.Controls.Add(button6);
-            panel1.Controls.Add(button5);
-            panel1.Controls.Add(button4);
-            panel1.Controls.Add(button3);
-            panel1.Controls.Add(button2);
-            panel1.Controls.Add(button1);
-            panel1.Controls.Add(label1);
+            panel1.BackColor = Color.OrangeRed;
+            panel1.Controls.Add(btnLogout);
+            panel1.Controls.Add(btnStockInquiry);
+            panel1.Controls.Add(btnTransaction);
+            panel1.Controls.Add(btnPOS);
+            panel1.Controls.Add(btnDashboard);
+            panel1.Controls.Add(label2);
             panel1.Controls.Add(pictureBox1);
-            panel1.Location = new Point(0, 1);
+            panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(164, 523);
-            panel1.TabIndex = 0;
+            panel1.Size = new Size(319, 742);
+            panel1.TabIndex = 2;
+            // 
+            // btnLogout
+            // 
+            btnLogout.BackColor = Color.OrangeRed;
+            btnLogout.FlatStyle = FlatStyle.Flat;
+            btnLogout.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
+            btnLogout.ForeColor = Color.White;
+            btnLogout.Location = new Point(36, 450);
+            btnLogout.Margin = new Padding(3, 2, 3, 2);
+            btnLogout.Name = "btnLogout";
+            btnLogout.Size = new Size(245, 47);
+            btnLogout.TabIndex = 22;
+            btnLogout.Text = "LOGOUT";
+            btnLogout.UseVisualStyleBackColor = false;
+            // 
+            // btnStockInquiry
+            // 
+            btnStockInquiry.BackColor = Color.OrangeRed;
+            btnStockInquiry.FlatStyle = FlatStyle.Flat;
+            btnStockInquiry.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
+            btnStockInquiry.ForeColor = Color.White;
+            btnStockInquiry.Location = new Point(36, 399);
+            btnStockInquiry.Margin = new Padding(3, 2, 3, 2);
+            btnStockInquiry.Name = "btnStockInquiry";
+            btnStockInquiry.Size = new Size(245, 47);
+            btnStockInquiry.TabIndex = 20;
+            btnStockInquiry.Text = "STOCK INQUIRY";
+            btnStockInquiry.UseVisualStyleBackColor = false;
+            // 
+            // btnTransaction
+            // 
+            btnTransaction.BackColor = Color.OrangeRed;
+            btnTransaction.FlatStyle = FlatStyle.Flat;
+            btnTransaction.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
+            btnTransaction.ForeColor = Color.White;
+            btnTransaction.Location = new Point(36, 348);
+            btnTransaction.Margin = new Padding(3, 2, 3, 2);
+            btnTransaction.Name = "btnTransaction";
+            btnTransaction.Size = new Size(245, 47);
+            btnTransaction.TabIndex = 19;
+            btnTransaction.Text = "TRANSACTION";
+            btnTransaction.UseVisualStyleBackColor = false;
+            btnTransaction.Click += btnTransaction_Click;
+            // 
+            // btnPOS
+            // 
+            btnPOS.BackColor = Color.OrangeRed;
+            btnPOS.FlatStyle = FlatStyle.Flat;
+            btnPOS.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
+            btnPOS.ForeColor = Color.White;
+            btnPOS.Location = new Point(36, 297);
+            btnPOS.Margin = new Padding(3, 2, 3, 2);
+            btnPOS.Name = "btnPOS";
+            btnPOS.Size = new Size(245, 47);
+            btnPOS.TabIndex = 18;
+            btnPOS.Text = "POS";
+            btnPOS.UseVisualStyleBackColor = false;
+            btnPOS.Click += btnPOS_Click;
+            // 
+            // btnDashboard
+            // 
+            btnDashboard.BackColor = Color.OrangeRed;
+            btnDashboard.FlatStyle = FlatStyle.Flat;
+            btnDashboard.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
+            btnDashboard.ForeColor = Color.White;
+            btnDashboard.Location = new Point(36, 246);
+            btnDashboard.Margin = new Padding(3, 2, 3, 2);
+            btnDashboard.Name = "btnDashboard";
+            btnDashboard.Size = new Size(245, 47);
+            btnDashboard.TabIndex = 17;
+            btnDashboard.Text = "DASHBOARD";
+            btnDashboard.UseVisualStyleBackColor = false;
+            btnDashboard.Click += btnDashboard_Click;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label2.ForeColor = Color.White;
+            label2.Location = new Point(11, 200);
+            label2.Name = "label2";
+            label2.Size = new Size(80, 32);
+            label2.TabIndex = 16;
+            label2.Text = "Menu";
             // 
             // pictureBox1
             // 
-            pictureBox1.Image = Properties.Resources.ddd3;
-            pictureBox1.Location = new Point(36, 11);
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(78, 11);
+            pictureBox1.Margin = new Padding(3, 2, 3, 2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(90, 84);
+            pictureBox1.Size = new Size(144, 116);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 0;
+            pictureBox1.TabIndex = 9;
             pictureBox1.TabStop = false;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.ForeColor = SystemColors.ControlLightLight;
-            label1.Location = new Point(12, 117);
+            label1.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(370, 50);
             label1.Name = "label1";
-            label1.Size = new Size(60, 23);
-            label1.TabIndex = 1;
-            label1.Text = "MENU";
+            label1.Size = new Size(187, 37);
+            label1.TabIndex = 3;
+            label1.Text = "Stock Inquiry";
             // 
-            // button1
+            // txtSearch
             // 
-            button1.BackColor = Color.DarkOrange;
-            button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button1.ForeColor = SystemColors.ControlLightLight;
-            button1.Location = new Point(12, 172);
-            button1.Name = "button1";
-            button1.Size = new Size(133, 29);
-            button1.TabIndex = 2;
-            button1.Text = "DASHBOARD";
-            button1.UseVisualStyleBackColor = false;
+            txtSearch.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            txtSearch.Location = new Point(379, 104);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(629, 35);
+            txtSearch.TabIndex = 4;
             // 
-            // button2
+            // dgvStock
             // 
-            button2.BackColor = Color.DarkOrange;
-            button2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button2.ForeColor = SystemColors.ControlLightLight;
-            button2.Location = new Point(12, 223);
-            button2.Name = "button2";
-            button2.Size = new Size(133, 29);
-            button2.TabIndex = 3;
-            button2.Text = "POS";
-            button2.UseVisualStyleBackColor = false;
+            dgvStock.BackgroundColor = Color.White;
+            dgvStock.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvStock.Location = new Point(379, 200);
+            dgvStock.Name = "dgvStock";
+            dgvStock.Size = new Size(903, 480);
+            dgvStock.TabIndex = 5;
             // 
-            // button3
+            // btnRefresh
             // 
-            button3.BackColor = Color.DarkOrange;
-            button3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button3.ForeColor = SystemColors.ControlLightLight;
-            button3.Location = new Point(12, 267);
-            button3.Name = "button3";
-            button3.Size = new Size(133, 29);
-            button3.TabIndex = 4;
-            button3.Text = "TRANSACTION";
-            button3.UseVisualStyleBackColor = false;
+            btnRefresh.BackColor = Color.FromArgb(128, 128, 255);
+            btnRefresh.FlatStyle = FlatStyle.Flat;
+            btnRefresh.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnRefresh.Location = new Point(1141, 104);
+            btnRefresh.Name = "btnRefresh";
+            btnRefresh.Size = new Size(123, 35);
+            btnRefresh.TabIndex = 11;
+            btnRefresh.Text = "REFRESH";
+            btnRefresh.UseVisualStyleBackColor = false;
             // 
-            // button4
+            // cboStatus
             // 
-            button4.BackColor = Color.DarkOrange;
-            button4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button4.ForeColor = SystemColors.ControlLightLight;
-            button4.Location = new Point(12, 317);
-            button4.Name = "button4";
-            button4.Size = new Size(133, 29);
-            button4.TabIndex = 5;
-            button4.Text = "STOCK INQUIRY";
-            button4.UseVisualStyleBackColor = false;
+            cboStatus.Font = new Font("Segoe UI", 15.75F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cboStatus.FormattingEnabled = true;
+            cboStatus.Location = new Point(1014, 101);
+            cboStatus.Name = "cboStatus";
+            cboStatus.Size = new Size(121, 38);
+            cboStatus.TabIndex = 12;
             // 
-            // button5
+            // lblSummary
             // 
-            button5.BackColor = Color.DarkOrange;
-            button5.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button5.ForeColor = SystemColors.ControlLightLight;
-            button5.Location = new Point(12, 366);
-            button5.Name = "button5";
-            button5.Size = new Size(133, 29);
-            button5.TabIndex = 6;
-            button5.Text = "PROFILE";
-            button5.UseVisualStyleBackColor = false;
-            // 
-            // button6
-            // 
-            button6.BackColor = Color.DarkOrange;
-            button6.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            button6.ForeColor = SystemColors.ControlLightLight;
-            button6.Location = new Point(12, 415);
-            button6.Name = "button6";
-            button6.Size = new Size(133, 29);
-            button6.TabIndex = 7;
-            button6.Text = "LOGOUT";
-            button6.UseVisualStyleBackColor = false;
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5 });
-            dataGridView1.Location = new Point(210, 118);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.Size = new Size(675, 370);
-            dataGridView1.TabIndex = 1;
-            // 
-            // Column1
-            // 
-            Column1.HeaderText = "Product ID";
-            Column1.MinimumWidth = 6;
-            Column1.Name = "Column1";
-            Column1.Width = 125;
-            // 
-            // Column2
-            // 
-            Column2.HeaderText = "Product";
-            Column2.MinimumWidth = 6;
-            Column2.Name = "Column2";
-            Column2.Width = 125;
-            // 
-            // Column3
-            // 
-            Column3.HeaderText = "Category";
-            Column3.MinimumWidth = 6;
-            Column3.Name = "Column3";
-            Column3.Width = 125;
-            // 
-            // Column4
-            // 
-            Column4.HeaderText = "Price";
-            Column4.MinimumWidth = 6;
-            Column4.Name = "Column4";
-            Column4.Width = 125;
-            // 
-            // Column5
-            // 
-            Column5.HeaderText = "Available Stock";
-            Column5.MinimumWidth = 6;
-            Column5.Name = "Column5";
-            Column5.Width = 125;
-            // 
-            // textBox1
-            // 
-            textBox1.Location = new Point(210, 69);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(675, 27);
-            textBox1.TabIndex = 2;
-            // 
-            // pictureBox2
-            // 
-            pictureBox2.Image = Properties.Resources.google_search_magnifying_glass_icon_21;
-            pictureBox2.Location = new Point(843, 69);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(42, 24);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 3;
-            pictureBox2.TabStop = false;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(210, 26);
-            label2.Name = "label2";
-            label2.Size = new Size(126, 25);
-            label2.TabIndex = 4;
-            label2.Text = "Stock Inquiry";
+            lblSummary.AutoSize = true;
+            lblSummary.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblSummary.Location = new Point(379, 169);
+            lblSummary.Name = "lblSummary";
+            lblSummary.Size = new Size(208, 15);
+            lblSummary.TabIndex = 13;
+            lblSummary.Text = "25 product(s) | 3 low | 1 out of stock";
             // 
             // StockInquiry
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Tan;
-            ClientSize = new Size(916, 524);
-            Controls.Add(label2);
-            Controls.Add(pictureBox2);
-            Controls.Add(textBox1);
-            Controls.Add(dataGridView1);
+            BackColor = Color.FromArgb(255, 192, 128);
+            ClientSize = new Size(1350, 729);
+            Controls.Add(lblSummary);
+            Controls.Add(cboStatus);
+            Controls.Add(btnRefresh);
+            Controls.Add(dgvStock);
+            Controls.Add(txtSearch);
+            Controls.Add(label1);
             Controls.Add(panel1);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "StockInquiry";
             Text = "StockInquiry";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvStock).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -258,22 +243,18 @@
         #endregion
 
         private Panel panel1;
-        private PictureBox pictureBox1;
-        private Button button6;
-        private Button button5;
-        private Button button4;
-        private Button button3;
-        private Button button2;
-        private Button button1;
-        private Label label1;
-        private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column3;
-        private DataGridViewTextBoxColumn Column4;
-        private DataGridViewTextBoxColumn Column5;
-        private TextBox textBox1;
-        private PictureBox pictureBox2;
+        private Button btnLogout;
+        private Button btnStockInquiry;
+        private Button btnTransaction;
+        private Button btnPOS;
+        private Button btnDashboard;
         private Label label2;
+        private PictureBox pictureBox1;
+        private Label label1;
+        private TextBox txtSearch;
+        private DataGridView dgvStock;
+        private Button btnRefresh;
+        private ComboBox cboStatus;
+        private Label lblSummary;
     }
 }
