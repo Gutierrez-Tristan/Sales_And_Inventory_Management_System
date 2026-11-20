@@ -28,269 +28,316 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CashierDashboard));
             panel1 = new Panel();
             btnLogout = new Button();
             btnStockInquiry = new Button();
-            this.btnTransaction = new Button();
-            btnPos = new Button();
+            btnTransaction = new Button();
+            btnPOS = new Button();
             btnDashboard = new Button();
-            label1 = new Label();
-            btnStockAlert = new Button();
-            btnRecentTransaction = new Button();
-            btnNoOfTransaction = new Button();
-            btnTodaySale = new Button();
-            btnProfile = new Button();
-            this.pictureBoxLogo = new PictureBox();
-            panel2 = new Panel();
             label2 = new Label();
-            label3 = new Label();
-            dgvOverview = new DataGridView();
+            pictureBox1 = new PictureBox();
+            label1 = new Label();
+            dgvRecent = new DataGridView();
+            btnReload = new Button();
+            panel2 = new Panel();
+            lblSalesToday = new Label();
+            panel3 = new Panel();
+            lblTransactions = new Label();
+            panel4 = new Panel();
+            lblItemsSold = new Label();
+            panel5 = new Panel();
+            lblLowStock = new Label();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)this.pictureBoxLogo).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvRecent).BeginInit();
             panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvOverview).BeginInit();
+            panel3.SuspendLayout();
+            panel4.SuspendLayout();
+            panel5.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
-            panel1.BackColor = Color.NavajoWhite;
-            panel1.Controls.Add(dgvOverview);
-            panel1.Controls.Add(label1);
-            panel1.Controls.Add(btnStockAlert);
-            panel1.Controls.Add(btnRecentTransaction);
-            panel1.Controls.Add(btnNoOfTransaction);
-            panel1.Controls.Add(btnTodaySale);
-            panel1.Controls.Add(panel2);
-            panel1.Location = new Point(-6, -1);
+            panel1.BackColor = Color.OrangeRed;
+            panel1.Controls.Add(btnLogout);
+            panel1.Controls.Add(btnStockInquiry);
+            panel1.Controls.Add(btnTransaction);
+            panel1.Controls.Add(btnPOS);
+            panel1.Controls.Add(btnDashboard);
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(pictureBox1);
+            panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(896, 508);
+            panel1.Size = new Size(319, 742);
             panel1.TabIndex = 0;
             // 
             // btnLogout
             // 
+            btnLogout.BackColor = Color.OrangeRed;
             btnLogout.FlatStyle = FlatStyle.Flat;
-            btnLogout.Font = new Font("Segoe UI", 8F);
+            btnLogout.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             btnLogout.ForeColor = Color.White;
-            btnLogout.Location = new Point(46, 418);
+            btnLogout.Location = new Point(37, 424);
+            btnLogout.Margin = new Padding(3, 2, 3, 2);
             btnLogout.Name = "btnLogout";
-            btnLogout.Size = new Size(142, 28);
-            btnLogout.TabIndex = 10;
+            btnLogout.Size = new Size(245, 47);
+            btnLogout.TabIndex = 15;
             btnLogout.Text = "LOGOUT";
-            btnLogout.UseVisualStyleBackColor = true;
+            btnLogout.UseVisualStyleBackColor = false;
+            btnLogout.Click += btnLogout_Click;
             // 
             // btnStockInquiry
             // 
             btnStockInquiry.BackColor = Color.OrangeRed;
             btnStockInquiry.FlatStyle = FlatStyle.Flat;
-            btnStockInquiry.Font = new Font("Segoe UI", 8F);
+            btnStockInquiry.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             btnStockInquiry.ForeColor = Color.White;
-            btnStockInquiry.Location = new Point(46, 350);
+            btnStockInquiry.Location = new Point(37, 373);
+            btnStockInquiry.Margin = new Padding(3, 2, 3, 2);
             btnStockInquiry.Name = "btnStockInquiry";
-            btnStockInquiry.Size = new Size(142, 28);
-            btnStockInquiry.TabIndex = 8;
-            btnStockInquiry.Text = "STOCKINQUIRY";
+            btnStockInquiry.Size = new Size(245, 47);
+            btnStockInquiry.TabIndex = 13;
+            btnStockInquiry.Text = "STOCK INQUIRY";
             btnStockInquiry.UseVisualStyleBackColor = false;
-            btnStockInquiry.Click += btnStockInquiry_Click;
             // 
             // btnTransaction
             // 
-            this.btnTransaction.BackColor = Color.OrangeRed;
-            this.btnTransaction.FlatStyle = FlatStyle.Flat;
-            this.btnTransaction.Font = new Font("Segoe UI", 8F);
-            this.btnTransaction.ForeColor = Color.White;
-            this.btnTransaction.Location = new Point(46, 316);
-            this.btnTransaction.Name = "btnTransaction";
-            this.btnTransaction.Size = new Size(142, 28);
-            this.btnTransaction.TabIndex = 7;
-            this.btnTransaction.Text = "TRANSACTION";
-            this.btnTransaction.UseVisualStyleBackColor = false;
+            btnTransaction.BackColor = Color.OrangeRed;
+            btnTransaction.FlatStyle = FlatStyle.Flat;
+            btnTransaction.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
+            btnTransaction.ForeColor = Color.White;
+            btnTransaction.Location = new Point(37, 322);
+            btnTransaction.Margin = new Padding(3, 2, 3, 2);
+            btnTransaction.Name = "btnTransaction";
+            btnTransaction.Size = new Size(245, 47);
+            btnTransaction.TabIndex = 12;
+            btnTransaction.Text = "TRANSACTION";
+            btnTransaction.UseVisualStyleBackColor = false;
+            btnTransaction.Click += btnTransaction_Click;
             // 
-            // btnPos
+            // btnPOS
             // 
-            btnPos.BackColor = Color.OrangeRed;
-            btnPos.FlatStyle = FlatStyle.Flat;
-            btnPos.Font = new Font("Segoe UI", 8F);
-            btnPos.ForeColor = Color.White;
-            btnPos.Location = new Point(46, 282);
-            btnPos.Name = "btnPos";
-            btnPos.Size = new Size(142, 28);
-            btnPos.TabIndex = 6;
-            btnPos.Text = "POS";
-            btnPos.UseVisualStyleBackColor = false;
+            btnPOS.BackColor = Color.OrangeRed;
+            btnPOS.FlatStyle = FlatStyle.Flat;
+            btnPOS.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
+            btnPOS.ForeColor = Color.White;
+            btnPOS.Location = new Point(37, 271);
+            btnPOS.Margin = new Padding(3, 2, 3, 2);
+            btnPOS.Name = "btnPOS";
+            btnPOS.Size = new Size(245, 47);
+            btnPOS.TabIndex = 11;
+            btnPOS.Text = "POS";
+            btnPOS.UseVisualStyleBackColor = false;
+            btnPOS.Click += btnPOS_Click;
             // 
             // btnDashboard
             // 
             btnDashboard.BackColor = Color.OrangeRed;
             btnDashboard.FlatStyle = FlatStyle.Flat;
-            btnDashboard.Font = new Font("Segoe UI", 8F);
+            btnDashboard.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold);
             btnDashboard.ForeColor = Color.White;
-            btnDashboard.Location = new Point(46, 248);
+            btnDashboard.Location = new Point(37, 220);
+            btnDashboard.Margin = new Padding(3, 2, 3, 2);
             btnDashboard.Name = "btnDashboard";
-            btnDashboard.Size = new Size(142, 28);
-            btnDashboard.TabIndex = 5;
+            btnDashboard.Size = new Size(245, 47);
+            btnDashboard.TabIndex = 10;
             btnDashboard.Text = "DASHBOARD";
             btnDashboard.UseVisualStyleBackColor = false;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(288, 26);
-            label1.Name = "label1";
-            label1.Size = new Size(118, 23);
-            label1.TabIndex = 4;
-            label1.Text = "DASHBOARD";
-            // 
-            // btnStockAlert
-            // 
-            btnStockAlert.Font = new Font("Segoe UI", 8F);
-            btnStockAlert.Location = new Point(621, 145);
-            btnStockAlert.Name = "btnStockAlert";
-            btnStockAlert.Size = new Size(138, 46);
-            btnStockAlert.TabIndex = 3;
-            btnStockAlert.Text = "STOCK ALERT";
-            btnStockAlert.UseVisualStyleBackColor = true;
-            // 
-            // btnRecentTransaction
-            // 
-            btnRecentTransaction.Font = new Font("Segoe UI", 8F);
-            btnRecentTransaction.Location = new Point(368, 145);
-            btnRecentTransaction.Name = "btnRecentTransaction";
-            btnRecentTransaction.Size = new Size(138, 46);
-            btnRecentTransaction.TabIndex = 2;
-            btnRecentTransaction.Text = "RECENT TRANSACTION";
-            btnRecentTransaction.UseVisualStyleBackColor = true;
-            // 
-            // btnNoOfTransaction
-            // 
-            btnNoOfTransaction.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnNoOfTransaction.Location = new Point(621, 79);
-            btnNoOfTransaction.Name = "btnNoOfTransaction";
-            btnNoOfTransaction.Size = new Size(138, 46);
-            btnNoOfTransaction.TabIndex = 1;
-            btnNoOfTransaction.Text = "NO. OF TRANSACTION";
-            btnNoOfTransaction.UseVisualStyleBackColor = true;
-            // 
-            // btnTodaySale
-            // 
-            btnTodaySale.Font = new Font("Segoe UI", 7.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            btnTodaySale.Location = new Point(368, 79);
-            btnTodaySale.Name = "btnTodaySale";
-            btnTodaySale.Size = new Size(138, 46);
-            btnTodaySale.TabIndex = 0;
-            btnTodaySale.Text = "TODAY'S SALE";
-            btnTodaySale.UseVisualStyleBackColor = true;
-            // 
-            // btnProfile
-            // 
-            btnProfile.BackColor = Color.OrangeRed;
-            btnProfile.FlatStyle = FlatStyle.Flat;
-            btnProfile.Font = new Font("Segoe UI", 8F);
-            btnProfile.ForeColor = Color.White;
-            btnProfile.Location = new Point(46, 384);
-            btnProfile.Name = "btnProfile";
-            btnProfile.Size = new Size(142, 28);
-            btnProfile.TabIndex = 11;
-            btnProfile.Text = "PROFILE";
-            btnProfile.UseVisualStyleBackColor = false;
-            // 
-            // pictureBoxLogo
-            // 
-            this.pictureBoxLogo.Image = Properties.Resources.ddd3;
-            this.pictureBoxLogo.Location = new Point(57, 26);
-            this.pictureBoxLogo.Name = "pictureBoxLogo";
-            this.pictureBoxLogo.Size = new Size(115, 99);
-            this.pictureBoxLogo.SizeMode = PictureBoxSizeMode.StretchImage;
-            this.pictureBoxLogo.TabIndex = 12;
-            this.pictureBoxLogo.TabStop = false;
-            // 
-            // panel2
-            // 
-            panel2.BackColor = Color.OrangeRed;
-            panel2.Controls.Add(label3);
-            panel2.Controls.Add(label2);
-            panel2.Controls.Add(btnProfile);
-            panel2.Controls.Add(this.pictureBoxLogo);
-            panel2.Controls.Add(btnStockInquiry);
-            panel2.Controls.Add(btnLogout);
-            panel2.Controls.Add(this.btnTransaction);
-            panel2.Controls.Add(btnDashboard);
-            panel2.Controls.Add(btnPos);
-            panel2.Dock = DockStyle.Left;
-            panel2.Location = new Point(0, 0);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(229, 508);
-            panel2.TabIndex = 13;
             // 
             // label2
             // 
             label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(19, 212);
+            label2.Location = new Point(12, 174);
             label2.Name = "label2";
-            label2.Size = new Size(46, 20);
-            label2.TabIndex = 13;
+            label2.Size = new Size(80, 32);
+            label2.TabIndex = 9;
             label2.Text = "Menu";
             // 
-            // label3
+            // pictureBox1
             // 
-            label3.AutoSize = true;
-            label3.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.ForeColor = Color.White;
-            label3.Location = new Point(39, 128);
-            label3.Name = "label3";
-            label3.Size = new Size(149, 31);
-            label3.TabIndex = 14;
-            label3.Text = "LOGO NAME";
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(72, 20);
+            pictureBox1.Margin = new Padding(3, 2, 3, 2);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(144, 116);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 8;
+            pictureBox1.TabStop = false;
             // 
-            // dgvOverview
+            // label1
             // 
-            dgvOverview.BackgroundColor = Color.White;
-            dgvOverview.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvOverview.Location = new Point(288, 225);
-            dgvOverview.Name = "dgvOverview";
-            dgvOverview.RowHeadersWidth = 51;
-            dgvOverview.Size = new Size(548, 248);
-            dgvOverview.TabIndex = 14;
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.Location = new Point(386, 45);
+            label1.Name = "label1";
+            label1.Size = new Size(186, 37);
+            label1.TabIndex = 1;
+            label1.Text = "DASHBOARD";
+            // 
+            // dgvRecent
+            // 
+            dgvRecent.BackgroundColor = Color.White;
+            dgvRecent.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvRecent.Location = new Point(353, 373);
+            dgvRecent.Margin = new Padding(3, 2, 3, 2);
+            dgvRecent.Name = "dgvRecent";
+            dgvRecent.RowHeadersWidth = 51;
+            dgvRecent.Size = new Size(985, 278);
+            dgvRecent.TabIndex = 9;
+            // 
+            // btnReload
+            // 
+            btnReload.BackColor = Color.SteelBlue;
+            btnReload.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnReload.ForeColor = Color.White;
+            btnReload.Location = new Point(353, 322);
+            btnReload.Margin = new Padding(3, 2, 3, 2);
+            btnReload.Name = "btnReload";
+            btnReload.Size = new Size(118, 43);
+            btnReload.TabIndex = 10;
+            btnReload.Text = "Reload";
+            btnReload.UseVisualStyleBackColor = false;
+            // 
+            // panel2
+            // 
+            panel2.BackColor = Color.OrangeRed;
+            panel2.Controls.Add(lblSalesToday);
+            panel2.Location = new Point(545, 95);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(207, 111);
+            panel2.TabIndex = 11;
+            // 
+            // lblSalesToday
+            // 
+            lblSalesToday.AutoSize = true;
+            lblSalesToday.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblSalesToday.ForeColor = Color.White;
+            lblSalesToday.Location = new Point(40, 16);
+            lblSalesToday.Name = "lblSalesToday";
+            lblSalesToday.Size = new Size(114, 25);
+            lblSalesToday.TabIndex = 1;
+            lblSalesToday.Text = "Sales Today";
+            lblSalesToday.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // panel3
+            // 
+            panel3.BackColor = Color.OrangeRed;
+            panel3.Controls.Add(lblTransactions);
+            panel3.Location = new Point(862, 95);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(207, 111);
+            panel3.TabIndex = 12;
+            // 
+            // lblTransactions
+            // 
+            lblTransactions.AutoSize = true;
+            lblTransactions.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTransactions.ForeColor = Color.White;
+            lblTransactions.Location = new Point(31, 16);
+            lblTransactions.Name = "lblTransactions";
+            lblTransactions.Size = new Size(123, 25);
+            lblTransactions.TabIndex = 2;
+            lblTransactions.Text = "Transactions";
+            lblTransactions.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // panel4
+            // 
+            panel4.BackColor = Color.OrangeRed;
+            panel4.Controls.Add(lblItemsSold);
+            panel4.Location = new Point(545, 220);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(207, 111);
+            panel4.TabIndex = 12;
+            // 
+            // lblItemsSold
+            // 
+            lblItemsSold.AutoSize = true;
+            lblItemsSold.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblItemsSold.ForeColor = Color.White;
+            lblItemsSold.Location = new Point(51, 22);
+            lblItemsSold.Name = "lblItemsSold";
+            lblItemsSold.Size = new Size(97, 25);
+            lblItemsSold.TabIndex = 4;
+            lblItemsSold.Text = "Item Sold";
+            lblItemsSold.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // panel5
+            // 
+            panel5.BackColor = Color.OrangeRed;
+            panel5.Controls.Add(lblLowStock);
+            panel5.Location = new Point(862, 220);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(207, 111);
+            panel5.TabIndex = 12;
+            // 
+            // lblLowStock
+            // 
+            lblLowStock.AutoSize = true;
+            lblLowStock.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblLowStock.ForeColor = Color.White;
+            lblLowStock.Location = new Point(50, 22);
+            lblLowStock.Name = "lblLowStock";
+            lblLowStock.Size = new Size(104, 25);
+            lblLowStock.TabIndex = 3;
+            lblLowStock.Text = "Low Stock";
+            lblLowStock.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // CashierDashboard
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(887, 503);
+            BackColor = Color.FromArgb(255, 192, 128);
+            ClientSize = new Size(1350, 729);
+            Controls.Add(panel5);
+            Controls.Add(panel4);
+            Controls.Add(panel3);
+            Controls.Add(panel2);
+            Controls.Add(btnReload);
+            Controls.Add(dgvRecent);
+            Controls.Add(label1);
             Controls.Add(panel1);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "CashierDashboard";
             Text = "CashierDashboard";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)this.pictureBoxLogo).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvRecent).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvOverview).EndInit();
+            panel3.ResumeLayout(false);
+            panel3.PerformLayout();
+            panel4.ResumeLayout(false);
+            panel4.PerformLayout();
+            panel5.ResumeLayout(false);
+            panel5.PerformLayout();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
-
+        private PictureBox pictureBox1;
         private Panel panel1;
-        private Button btnNoOfTransaction;
-        private Button btnTodaySale;
-        private Label label1;
-        private Button btnStockAlert;
-        private Button btnRecentTransaction;
-        private Button button3;
-        private Button btnPos;
-        private Button btnDashboard;
-        private Button button2;
-        private Button btnStockInquiry;
-        private Button btnTransaction;
+        private Label label2;
         private Button btnLogout;
         private Button btnProfile;
-        private PictureBox pictureBoxLogo;
-        private PictureBox pictureBox1;
+        private Button btnStockInquiry;
+        private Button btnTransaction;
+        private Button btnPOS;
+        private Button btnDashboard;
+        private Label label1;
+        private DataGridView dgvRecent;
+        private Button btnReload;
         private Panel panel2;
-        private Label label2;
-        private Label label3;
-        private DataGridView dgvOverview;
+        private Label lblSalesToday;
+        private Panel panel3;
+        private Panel panel4;
+        private Panel panel5;
+        private Label lblTransactions;
+        private Label lblItemsSold;
+        private Label lblLowStock;
     }
 }

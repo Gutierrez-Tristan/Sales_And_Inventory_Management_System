@@ -1,6 +1,8 @@
 <Solution>
+  <Project Path="BusinessLogic/BusinessLogic.csproj" Id="4d08ef3b-813b-4465-ad0c-68c01ad7c1eb" />
+  <Project Path="Model/Model.csproj" Id="43e29618-95a0-4bdb-b1c5-e4e40d4139b4" />
   <Project Path="SAIMS/SAIMS.csproj" />
-  <Project Path="SAIMSDatabase/SAIMSDatabase.sqlproj" Id="5e02f04f-1e3a-40ca-a078-458a46c19862">
+  <Project Path="SAIMSDatabases/SAIMSDatabases.sqlproj" Id="0ca59b4f-2dc6-47bd-9611-e6294899c4af">
     <Build />
     <Deploy />
   </Project>

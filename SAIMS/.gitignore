@@ -1,0 +1,6 @@
+*.dbmdl
+*.jfm
+*.csproj.user
+bin/
+obj/
+.vs/
