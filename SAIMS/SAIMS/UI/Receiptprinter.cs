@@ -66,10 +66,13 @@ namespace SAIMS.UI
         // Units are 1/100 inch, which is what printers use.
         private static float Draw(Graphics? g, SaleModel sale, int saleId, DateTime date, string cashier)
         {
-            // Work the totals out here so a rebuilt (reprinted) sale needs only items, discount and payment
+            // ----- totals (same formula as the POS and the controller) -----
             decimal subtotal = sale.Items.Sum(i => i.UnitPrice * i.Quantity);
-            decimal total = Math.Max(subtotal - sale.Discount, 0);
-            decimal change = Math.Max(sale.AmountPaid - total, 0);
+            var t = SaleCalculator.Compute(subtotal, sale.Discount, sale.VatRate);
+            decimal total = t.Total;
+            bool exempt = SaleCalculator.IsVatExempt(sale.DiscountType);
+            string discLabel = exempt ? $"Discount ({sale.DiscountType} 20%)" : "Discount";
+            string payMethod = string.IsNullOrWhiteSpace(sale.PaymentMethod) ? "Cash" : sale.PaymentMethod;
 
             const float L = 10, CW = 295;   // left margin, content width
             float y = 10;
@@ -175,10 +178,15 @@ namespace SAIMS.UI
 
             // ----- totals -----
             Pair("Subtotal", subtotal.ToString("N2"), fBody);
-            Pair("Discount", sale.Discount > 0 ? "-" + sale.Discount.ToString("N2") : "0.00", fBody);
+            Pair(discLabel, sale.Discount > 0 ? "-" + sale.Discount.ToString("N2") : "0.00", fBody);
+            if (sale.VatRate > 0)
+                Pair($"VAT ({sale.VatRate:P0})", t.Vat.ToString("N2"), fBody);
+            else if (exempt)
+                Pair("VAT", "EXEMPT", fBody);
             Pair("TOTAL", total.ToString("N2"), fTotal, 22);
+            Pair("Payment Mode", payMethod, fBody);
             Pair("Amount Paid", sale.AmountPaid.ToString("N2"), fBody);
-            Pair("Change", change.ToString("N2"), fBody);
+            Pair("Change", sale.ChangeAmount.ToString("N2"), fBody);
             Dash();
 
             // ----- footer -----

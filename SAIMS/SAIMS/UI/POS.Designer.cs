@@ -47,7 +47,6 @@
             dgvCart = new DataGridView();
             label3 = new Label();
             label4 = new Label();
-            txtDiscount = new TextBox();
             txtTotal = new TextBox();
             label5 = new Label();
             numQty = new NumericUpDown();
@@ -66,6 +65,11 @@
             label9 = new Label();
             label8 = new Label();
             label7 = new Label();
+            lblVat = new Label();
+            txtVat = new TextBox();
+            cboDiscount = new ComboBox();
+            cboPayMethod = new ComboBox();
+            label11 = new Label();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvProducts).BeginInit();
@@ -219,9 +223,9 @@
             btnAddToCart.FlatStyle = FlatStyle.Flat;
             btnAddToCart.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnAddToCart.ForeColor = SystemColors.ControlText;
-            btnAddToCart.Location = new Point(632, 308);
+            btnAddToCart.Location = new Point(567, 314);
             btnAddToCart.Name = "btnAddToCart";
-            btnAddToCart.Size = new Size(106, 36);
+            btnAddToCart.Size = new Size(106, 29);
             btnAddToCart.TabIndex = 12;
             btnAddToCart.Text = "Add to cart";
             btnAddToCart.UseVisualStyleBackColor = false;
@@ -231,9 +235,9 @@
             btnRemoveItem.BackColor = Color.LightCoral;
             btnRemoveItem.FlatStyle = FlatStyle.Flat;
             btnRemoveItem.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnRemoveItem.Location = new Point(744, 308);
+            btnRemoveItem.Location = new Point(454, 554);
             btnRemoveItem.Name = "btnRemoveItem";
-            btnRemoveItem.Size = new Size(120, 36);
+            btnRemoveItem.Size = new Size(141, 32);
             btnRemoveItem.TabIndex = 13;
             btnRemoveItem.Text = "Remove Item";
             btnRemoveItem.UseVisualStyleBackColor = false;
@@ -262,14 +266,14 @@
             dgvCart.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvCart.Location = new Point(354, 434);
             dgvCart.Name = "dgvCart";
-            dgvCart.Size = new Size(903, 140);
+            dgvCart.Size = new Size(903, 114);
             dgvCart.TabIndex = 16;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label3.Location = new Point(1092, 617);
+            label3.Location = new Point(1092, 586);
             label3.Name = "label3";
             label3.Size = new Size(59, 15);
             label3.TabIndex = 17;
@@ -279,22 +283,15 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label4.Location = new Point(1114, 648);
+            label4.Location = new Point(1114, 644);
             label4.Name = "label4";
             label4.Size = new Size(37, 15);
             label4.TabIndex = 18;
             label4.Text = "Total:";
             // 
-            // txtDiscount
-            // 
-            txtDiscount.Location = new Point(1157, 614);
-            txtDiscount.Name = "txtDiscount";
-            txtDiscount.Size = new Size(100, 23);
-            txtDiscount.TabIndex = 19;
-            // 
             // txtTotal
             // 
-            txtTotal.Location = new Point(1157, 645);
+            txtTotal.Location = new Point(1157, 641);
             txtTotal.Name = "txtTotal";
             txtTotal.Size = new Size(100, 23);
             txtTotal.TabIndex = 20;
@@ -322,7 +319,7 @@
             btnClear.BackColor = Color.FromArgb(255, 255, 128);
             btnClear.FlatStyle = FlatStyle.Flat;
             btnClear.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnClear.Location = new Point(354, 588);
+            btnClear.Location = new Point(354, 554);
             btnClear.Name = "btnClear";
             btnClear.Size = new Size(94, 32);
             btnClear.TabIndex = 23;
@@ -333,7 +330,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label6.Location = new Point(1092, 588);
+            label6.Location = new Point(1094, 557);
             label6.Name = "label6";
             label6.Size = new Size(57, 15);
             label6.TabIndex = 24;
@@ -341,7 +338,7 @@
             // 
             // txtSubtotal
             // 
-            txtSubtotal.Location = new Point(1157, 585);
+            txtSubtotal.Location = new Point(1157, 554);
             txtSubtotal.Name = "txtSubtotal";
             txtSubtotal.Size = new Size(100, 23);
             txtSubtotal.TabIndex = 25;
@@ -351,7 +348,7 @@
             btnCheckout.BackColor = Color.FromArgb(128, 255, 128);
             btnCheckout.FlatStyle = FlatStyle.Flat;
             btnCheckout.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnCheckout.Location = new Point(1092, 674);
+            btnCheckout.Location = new Point(1094, 670);
             btnCheckout.Name = "btnCheckout";
             btnCheckout.Size = new Size(165, 30);
             btnCheckout.TabIndex = 26;
@@ -362,7 +359,7 @@
             // 
             pnlPayment.BackColor = Color.OrangeRed;
             pnlPayment.Controls.Add(panel4);
-            pnlPayment.Location = new Point(650, 150);
+            pnlPayment.Location = new Point(679, 168);
             pnlPayment.Name = "pnlPayment";
             pnlPayment.Size = new Size(376, 438);
             pnlPayment.TabIndex = 27;
@@ -370,6 +367,8 @@
             // panel4
             // 
             panel4.BackColor = Color.White;
+            panel4.Controls.Add(label11);
+            panel4.Controls.Add(cboPayMethod);
             panel4.Controls.Add(btnPayCancel);
             panel4.Controls.Add(btnPayConfirm);
             panel4.Controls.Add(txtPayChange);
@@ -389,7 +388,7 @@
             btnPayCancel.BackColor = Color.FromArgb(255, 128, 128);
             btnPayCancel.FlatStyle = FlatStyle.Flat;
             btnPayCancel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnPayCancel.Location = new Point(202, 351);
+            btnPayCancel.Location = new Point(202, 333);
             btnPayCancel.Name = "btnPayCancel";
             btnPayCancel.Size = new Size(101, 34);
             btnPayCancel.TabIndex = 8;
@@ -401,7 +400,7 @@
             btnPayConfirm.BackColor = Color.FromArgb(128, 255, 128);
             btnPayConfirm.FlatStyle = FlatStyle.Flat;
             btnPayConfirm.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnPayConfirm.Location = new Point(38, 351);
+            btnPayConfirm.Location = new Point(38, 333);
             btnPayConfirm.Name = "btnPayConfirm";
             btnPayConfirm.Size = new Size(101, 34);
             btnPayConfirm.TabIndex = 7;
@@ -419,7 +418,7 @@
             // txtPayAmount
             // 
             txtPayAmount.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtPayAmount.Location = new Point(145, 190);
+            txtPayAmount.Location = new Point(145, 209);
             txtPayAmount.Name = "txtPayAmount";
             txtPayAmount.Size = new Size(158, 29);
             txtPayAmount.TabIndex = 5;
@@ -446,7 +445,7 @@
             // 
             label9.AutoSize = true;
             label9.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label9.Location = new Point(25, 193);
+            label9.Location = new Point(25, 212);
             label9.Name = "label9";
             label9.Size = new Size(114, 21);
             label9.TabIndex = 2;
@@ -472,12 +471,59 @@
             label7.TabIndex = 0;
             label7.Text = "PAYMENT";
             // 
+            // lblVat
+            // 
+            lblVat.AutoSize = true;
+            lblVat.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblVat.Location = new Point(1123, 615);
+            lblVat.Name = "lblVat";
+            lblVat.Size = new Size(28, 15);
+            lblVat.TabIndex = 28;
+            lblVat.Text = "Vat:";
+            // 
+            // txtVat
+            // 
+            txtVat.Location = new Point(1157, 612);
+            txtVat.Name = "txtVat";
+            txtVat.Size = new Size(100, 23);
+            txtVat.TabIndex = 29;
+            // 
+            // cboDiscount
+            // 
+            cboDiscount.FormattingEnabled = true;
+            cboDiscount.Location = new Point(1157, 583);
+            cboDiscount.Name = "cboDiscount";
+            cboDiscount.Size = new Size(100, 23);
+            cboDiscount.TabIndex = 30;
+            // 
+            // cboPayMethod
+            // 
+            cboPayMethod.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            cboPayMethod.FormattingEnabled = true;
+            cboPayMethod.Location = new Point(183, 160);
+            cboPayMethod.Name = "cboPayMethod";
+            cboPayMethod.Size = new Size(120, 29);
+            cboPayMethod.TabIndex = 9;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label11.Location = new Point(25, 163);
+            label11.Name = "label11";
+            label11.Size = new Size(152, 21);
+            label11.TabIndex = 10;
+            label11.Text = "Mode Of Payment:";
+            // 
             // POS
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(255, 192, 128);
             ClientSize = new Size(1350, 729);
+            Controls.Add(cboDiscount);
+            Controls.Add(txtVat);
+            Controls.Add(lblVat);
             Controls.Add(pnlPayment);
             Controls.Add(btnCheckout);
             Controls.Add(txtSubtotal);
@@ -486,7 +532,6 @@
             Controls.Add(numQty);
             Controls.Add(label5);
             Controls.Add(txtTotal);
-            Controls.Add(txtDiscount);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(dgvCart);
@@ -534,7 +579,6 @@
         private DataGridView dgvCart;
         private Label label3;
         private Label label4;
-        private TextBox txtDiscount;
         private TextBox txtTotal;
         private Label label5;
         private NumericUpDown numQty;
@@ -553,5 +597,10 @@
         private Button btnPayCancel;
         private Button btnPayConfirm;
         private TextBox txtPayChange;
+        private Label lblVat;
+        private TextBox txtVat;
+        private ComboBox cboDiscount;
+        private Label label11;
+        private ComboBox cboPayMethod;
     }
 }

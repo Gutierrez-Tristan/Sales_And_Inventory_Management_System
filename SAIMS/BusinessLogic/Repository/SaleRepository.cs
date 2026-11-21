@@ -16,14 +16,18 @@ namespace SAIMS.BusinessLogic.Repository
 
             int saleId;
             using (var cmd = new SqlCommand(
-                @"INSERT INTO tblSale (CashierID, Subtotal, Discount, Total, AmountPaid, ChangeAmount)
+                @"INSERT INTO tblSale (CashierID, Subtotal, Discount, DiscountType, VatRate, VatAmount, Total, PaymentMethod, AmountPaid, ChangeAmount)
                   OUTPUT INSERTED.SaleID
-                  VALUES (@cashier, @sub, @disc, @total, @paid, @change)", conn, tx))
+                  VALUES (@cashier, @sub, @disc, @dtype, @vatRate, @vat, @total, @method, @paid, @change)", conn, tx))
             {
                 cmd.Parameters.AddWithValue("@cashier", sale.CashierID);
                 cmd.Parameters.AddWithValue("@sub", sale.Subtotal);
                 cmd.Parameters.AddWithValue("@disc", sale.Discount);
+                cmd.Parameters.AddWithValue("@dtype", sale.DiscountType);
+                cmd.Parameters.AddWithValue("@vatRate", sale.VatRate);
+                cmd.Parameters.AddWithValue("@vat", sale.VatAmount);
                 cmd.Parameters.AddWithValue("@total", sale.Total);
+                cmd.Parameters.AddWithValue("@method", sale.PaymentMethod);
                 cmd.Parameters.AddWithValue("@paid", sale.AmountPaid);
                 cmd.Parameters.AddWithValue("@change", sale.ChangeAmount);
                 saleId = (int)cmd.ExecuteScalar();
@@ -107,7 +111,8 @@ namespace SAIMS.BusinessLogic.Repository
         // Rebuilds a saved sale (with its items) for reprinting the receipt
         public SaleModel? GetSale(int saleId)
         {
-            const string headSql = @"SELECT CashierID, Subtotal, Discount, Total, AmountPaid, ChangeAmount
+            const string headSql = @"SELECT CashierID, Subtotal, Discount, DiscountType, VatRate, VatAmount, Total,
+                                            PaymentMethod, AmountPaid, ChangeAmount
                                      FROM tblSale WHERE SaleID=@id";
             const string itemSql = @"
                 SELECT si.ProductID, sp.ItemName, si.Quantity, si.UnitPrice
@@ -128,7 +133,11 @@ namespace SAIMS.BusinessLogic.Repository
                 sale.CashierID = Convert.ToInt32(r["CashierID"]);
                 sale.Subtotal = r.GetDecimal(r.GetOrdinal("Subtotal"));
                 sale.Discount = r.GetDecimal(r.GetOrdinal("Discount"));
+                sale.DiscountType = r["DiscountType"].ToString() ?? "None";
+                sale.VatRate = r.GetDecimal(r.GetOrdinal("VatRate"));
+                sale.VatAmount = r.GetDecimal(r.GetOrdinal("VatAmount"));
                 sale.Total = r.GetDecimal(r.GetOrdinal("Total"));
+                sale.PaymentMethod = r["PaymentMethod"].ToString() ?? "Cash";
                 sale.AmountPaid = r.GetDecimal(r.GetOrdinal("AmountPaid"));
                 sale.ChangeAmount = r.GetDecimal(r.GetOrdinal("ChangeAmount"));
             }

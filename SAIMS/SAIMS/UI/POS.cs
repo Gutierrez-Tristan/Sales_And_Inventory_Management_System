@@ -1,7 +1,4 @@
 ﻿using System.ComponentModel;
-using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
-using System.Drawing.Printing;
 using SAIMS.BusinessLogic;
 using SAIMS.Model;
 
@@ -9,17 +6,6 @@ namespace SAIMS.UI
 {
     public partial class POS : Form
     {
-        // ---- edit these for your store ----
-        private const string StoreName = "INVEXA";
-        private const string StoreTagline = "Sales and Inventory System";
-        private const string StoreAddress = "123 Sample Street, City";
-        private const string StoreContact = "Tel: 0900 000 0000";
-        private const float LogoHeight = 80;       // printed logo height (1/100 inch)
-        private const bool LogoGrayscale = false;   // false = colour logo, true = grey (best for thermal printers)
-        private const bool ThermalPaper = true;    // true = 80 mm roll, false = normal A4/Letter
-
-        private const float ReceiptWidth = 315;       // 80 mm in 1/100 inch
-
         private readonly ProductController _productController = new();
         private readonly SaleController _saleController = new();
         private readonly BindingList<SaleItemModel> _cart = new();
@@ -39,9 +25,20 @@ namespace SAIMS.UI
             numQty.Value = 1;
 
             txtSubtotal.ReadOnly = true;
+            txtVat.ReadOnly = true;
             txtTotal.ReadOnly = true;
             txtPayTotal.ReadOnly = true;
             txtPayChange.ReadOnly = true;
+
+            // discount type: None / Senior Citizen / PWD
+            cboDiscount.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboDiscount.Items.AddRange(SaleCalculator.DiscountTypes);
+            cboDiscount.SelectedIndex = 0;
+
+            // mode of payment: Cash / GCash / Card
+            cboPayMethod.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboPayMethod.Items.AddRange(PaymentTypes.All);
+            cboPayMethod.SelectedIndex = 0;
 
             pnlPayment.Visible = false;
 
@@ -56,10 +53,10 @@ namespace SAIMS.UI
             btnRemoveItem.Click += btnRemoveItem_Click;
             btnClear.Click += btnClear_Click;
             btnCheckout.Click += btnCheckout_Click;
-            txtDiscount.TextChanged += (s, e) => RecalcTotals();
-            txtDiscount.KeyPress += MoneyOnly;
+            cboDiscount.SelectedIndexChanged += (s, e) => RecalcTotals();
 
             // payment panel
+            cboPayMethod.SelectedIndexChanged += (s, e) => ApplyPayMethod();
             txtPayAmount.TextChanged += (s, e) => RecalcChange();
             txtPayAmount.KeyPress += MoneyOnly;
             btnPayConfirm.Click += btnPayConfirm_Click;
@@ -167,13 +164,19 @@ namespace SAIMS.UI
         }
 
         // =============== TOTALS ===============
+        private string SelectedDiscountType => cboDiscount.SelectedItem?.ToString() ?? "None";
+        private string SelectedPayMethod => cboPayMethod.SelectedItem?.ToString() ?? "Cash";
+
         private void RecalcTotals()
         {
             decimal subtotal = _cart.Sum(c => c.LineTotal);
-            decimal discount = ParseMoney(txtDiscount.Text);
+            string type = SelectedDiscountType;
+            decimal discount = SaleCalculator.DiscountFor(subtotal, type);
+            var t = SaleCalculator.Compute(subtotal, discount, SaleCalculator.VatRateFor(type));
 
-            _total = Math.Max(subtotal - discount, 0);
+            _total = t.Total;
             txtSubtotal.Text = subtotal.ToString("N2");
+            txtVat.Text = t.Vat.ToString("N2");
             txtTotal.Text = _total.ToString("N2");
         }
 
@@ -187,6 +190,25 @@ namespace SAIMS.UI
             decimal.TryParse(text.Trim(), out var v) ? v : 0;
 
         // =============== PAYMENT PANEL ===============
+        // Cash: the cashier types the amount received.
+        // GCash / Card: the exact total is paid, so the amount is filled in and locked.
+        private void ApplyPayMethod()
+        {
+            bool cash = PaymentTypes.IsCash(SelectedPayMethod);
+            txtPayAmount.Enabled = cash;
+
+            if (cash)
+            {
+                txtPayAmount.Clear();
+                txtPayAmount.Focus();
+            }
+            else
+            {
+                txtPayAmount.Text = _total.ToString("0.00");
+            }
+            RecalcChange();
+        }
+
         private void btnCheckout_Click(object? sender, EventArgs e)
         {
             if (_cart.Count == 0)
@@ -199,20 +221,16 @@ namespace SAIMS.UI
                 MessageBox.Show("No cashier is logged in.", "POS");
                 return;
             }
-            if (ParseMoney(txtDiscount.Text) > _cart.Sum(c => c.LineTotal))
-            {
-                MessageBox.Show("Discount cannot be more than the subtotal.", "POS");
-                return;
-            }
 
             txtPayTotal.Text = _total.ToString("N2");
-            txtPayAmount.Clear();
             txtPayChange.Text = "0.00";
 
             pnlPayment.Visible = true;
             pnlPayment.BringToFront();
             SetBusy(true);
-            txtPayAmount.Focus();
+
+            cboPayMethod.SelectedIndex = 0;     // every sale starts on Cash
+            ApplyPayMethod();
         }
 
         private void ClosePayment()
@@ -226,7 +244,8 @@ namespace SAIMS.UI
             var sale = new SaleModel
             {
                 CashierID = (int)(UserSession.Current?.Id ?? 0),
-                Discount = ParseMoney(txtDiscount.Text),
+                DiscountType = SelectedDiscountType,   // the controller works out the discount and VAT
+                PaymentMethod = SelectedPayMethod,
                 AmountPaid = ParseMoney(txtPayAmount.Text),
                 Items = _cart.ToList()
             };
@@ -249,183 +268,16 @@ namespace SAIMS.UI
             ResetSale();
             LoadProducts();                 // show the updated stock
 
-            ShowPrintPreview();             // the receipt opens in Print Preview
+            ReceiptPrinter.ShowPreview(this, _lastSale!, _lastSaleId, _lastDate,
+                                       UserSession.Current?.Username ?? "");   // the receipt opens in Print Preview
             txtSearch.Focus();
-        }
-
-        // =============== PRINT PREVIEW ===============
-        private void ShowPrintPreview()
-        {
-            if (_lastSale == null) return;
-
-            try
-            {
-                var doc = new PrintDocument();
-
-                if (ThermalPaper)
-                {
-                    // 80 mm roll. Height fits the content.
-                    int height = (int)DrawReceipt(null) + 20;
-                    doc.DefaultPageSettings.PaperSize = new PaperSize("Receipt80mm", (int)ReceiptWidth, height);
-                    doc.DefaultPageSettings.Margins = new Margins(0, 0, 0, 0);
-                }
-
-                doc.PrintPage += (s, ev) =>
-                {
-                    var g = ev.Graphics!;
-
-                    // Center the receipt on whatever paper the printer really uses
-                    // (e.g. "Microsoft Print to PDF" uses a full Letter page)
-                    float x = (ev.PageBounds.Width - ReceiptWidth) / 2f - ev.PageSettings.HardMarginX;
-                    g.TranslateTransform(Math.Max(x, 0), 0);
-
-                    DrawReceipt(g);
-                    ev.HasMorePages = false;
-                };
-
-                using var preview = new PrintPreviewDialog
-                {
-                    Document = doc,
-                    UseAntiAlias = true,
-                    WindowState = FormWindowState.Maximized,
-                    StartPosition = FormStartPosition.CenterScreen,
-                    Text = "Print preview"
-                };
-                preview.ShowDialog(this);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Could not show the receipt: " + ex.Message, "Print");
-            }
-        }
-
-        // Draws the receipt. Pass null to only measure it. Returns the final height.
-        // Units are 1/100 inch, which is what printers use.
-        private float DrawReceipt(Graphics? g)
-        {
-            var sale = _lastSale;
-            if (sale == null) return 0;
-
-            const float L = 10, CW = 295;   // left margin, content width
-            float y = 10;
-
-            using var fBody = new Font("Consolas", 8);
-            using var fBold = new Font("Consolas", 8, FontStyle.Bold);
-            using var fSmall = new Font("Consolas", 7);
-            using var fTitle = new Font("Consolas", 14, FontStyle.Bold);
-            using var fTotal = new Font("Consolas", 11, FontStyle.Bold);
-
-            void Put(string s, Font f, StringAlignment a, float h,
-                     float x = L, float w = CW, Brush? b = null)
-            {
-                if (g == null) return;
-                using var sf = new StringFormat
-                {
-                    Alignment = a,
-                    Trimming = StringTrimming.EllipsisCharacter,
-                    FormatFlags = StringFormatFlags.NoWrap
-                };
-                g.DrawString(s, f, b ?? Brushes.Black, new RectangleF(x, y, w, h), sf);
-            }
-
-            void Center(string s, Font f, float h) { Put(s, f, StringAlignment.Center, h); y += h; }
-
-            void Pair(string left, string right, Font f, float h = 14)
-            {
-                Put(left, f, StringAlignment.Near, h);
-                Put(right, f, StringAlignment.Far, h);
-                y += h;
-            }
-
-            void Dash()
-            {
-                if (g != null)
-                {
-                    using var pen = new Pen(Color.Black) { DashStyle = DashStyle.Dash };
-                    g.DrawLine(pen, L, y + 4, L + CW, y + 4);
-                }
-                y += 10;
-            }
-
-            // ----- header with logo (Resources/ddd.png) -----
-            var logo = Properties.Resources.ddd;
-            if (logo != null)
-            {
-                float logoW = LogoHeight * logo.Width / logo.Height;   // keep the proportions
-                if (g != null)
-                {
-                    var dest = new Rectangle((int)((ReceiptWidth - logoW) / 2f), (int)y,
-                                             (int)logoW, (int)LogoHeight);
-                    using var attrs = new ImageAttributes();
-                    if (LogoGrayscale)
-                    {
-                        attrs.SetColorMatrix(new ColorMatrix(new[]
-                        {
-                            new[] { 0.30f, 0.30f, 0.30f, 0f, 0f },
-                            new[] { 0.59f, 0.59f, 0.59f, 0f, 0f },
-                            new[] { 0.11f, 0.11f, 0.11f, 0f, 0f },
-                            new[] { 0f,    0f,    0f,    1f, 0f },
-                            new[] { 0f,    0f,    0f,    0f, 1f }
-                        }));
-                    }
-                    g.DrawImage(logo, dest, 0, 0, logo.Width, logo.Height, GraphicsUnit.Pixel, attrs);
-                }
-                y += LogoHeight + 6;                        // counted in the measuring pass too
-            }
-
-            Center(StoreName, fTitle, 26);
-            Center(StoreTagline, fSmall, 12);
-            Center(StoreAddress, fSmall, 12);
-            Center(StoreContact, fSmall, 12);
-            Dash();
-
-            // ----- sale info -----
-            Pair("Sale #", _lastSaleId.ToString(), fBody);
-            Pair("Date", _lastDate.ToString("dd/MM/yyyy hh:mm tt"), fBody);
-            Pair("Cashier", UserSession.Current?.Username ?? "", fBody);
-            Dash();
-
-            // ----- items -----
-            Put("ITEM", fBold, StringAlignment.Near, 14, L, 165);
-            Put("QTY", fBold, StringAlignment.Center, 14, 175, 40);
-            Put("AMOUNT", fBold, StringAlignment.Far, 14, 215, 90);
-            y += 16;
-
-            foreach (var i in sale.Items)
-            {
-                Put(i.ItemName, fBody, StringAlignment.Near, 14, L, 165);
-                Put(i.Quantity.ToString(), fBody, StringAlignment.Center, 14, 175, 40);
-                Put(i.LineTotal.ToString("N2"), fBody, StringAlignment.Far, 14, 215, 90);
-                y += 14;
-
-                if (i.Quantity > 1)
-                {
-                    Put($"  @ {i.UnitPrice:N2}", fSmall, StringAlignment.Near, 12, L, CW, Brushes.Gray);
-                    y += 12;
-                }
-            }
-            Dash();
-
-            // ----- totals -----
-            Pair("Subtotal", sale.Subtotal.ToString("N2"), fBody);
-            Pair("Discount", Math.Round(sale.Discount, 2) > 0 ? "-" + sale.Discount.ToString("N2") : "0.00", fBody);
-            Pair("TOTAL", sale.Total.ToString("N2"), fTotal, 22);
-            Pair("Amount Paid", sale.AmountPaid.ToString("N2"), fBody);
-            Pair("Change", sale.ChangeAmount.ToString("N2"), fBody);
-            Dash();
-
-            // ----- footer -----
-            Center("Thank you for shopping!", fBold, 16);
-            Center("Please come again", fSmall, 12);
-
-            return y;
         }
 
         // =============== HELPERS ===============
         private void ResetSale()
         {
             _cart.Clear();
-            txtDiscount.Clear();
+            cboDiscount.SelectedIndex = 0;
             numQty.Value = 1;
             RecalcTotals();
         }
@@ -441,7 +293,7 @@ namespace SAIMS.UI
             btnRemoveItem.Enabled = !busy;
             btnClear.Enabled = !busy;
             btnCheckout.Enabled = !busy;
-            txtDiscount.Enabled = !busy;
+            cboDiscount.Enabled = !busy;
         }
 
         private void MoneyOnly(object? sender, KeyPressEventArgs e)
@@ -451,6 +303,7 @@ namespace SAIMS.UI
             if (!ok) e.Handled = true;
         }
 
+        // =============== NAVIGATION ===============
         private void btnDashboard_Click(object sender, EventArgs e)
         {
             CashierDashboard frmCashierDashboard = new CashierDashboard();

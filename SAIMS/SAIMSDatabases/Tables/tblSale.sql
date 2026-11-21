@@ -7,5 +7,7 @@
     [Discount]     DECIMAL(12,2) NOT NULL DEFAULT 0,
     [Total]        DECIMAL(12,2) NOT NULL,
     [AmountPaid]   DECIMAL(12,2) NOT NULL,
-    [ChangeAmount] DECIMAL(12,2) NOT NULL
+    [ChangeAmount] DECIMAL(12,2) NOT NULL,
+    [VatRate]      DECIMAL(5,4)  NOT NULL DEFAULT 0,
+    [VatAmount]    DECIMAL(12,2) NOT NULL DEFAULT 0,
 );

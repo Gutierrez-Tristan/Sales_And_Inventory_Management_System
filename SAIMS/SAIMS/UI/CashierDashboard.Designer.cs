@@ -236,7 +236,7 @@
             lblTransactions.AutoSize = true;
             lblTransactions.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTransactions.ForeColor = Color.White;
-            lblTransactions.Location = new Point(31, 16);
+            lblTransactions.Location = new Point(20, 16);
             lblTransactions.Name = "lblTransactions";
             lblTransactions.Size = new Size(123, 25);
             lblTransactions.TabIndex = 2;
@@ -257,7 +257,7 @@
             lblItemsSold.AutoSize = true;
             lblItemsSold.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblItemsSold.ForeColor = Color.White;
-            lblItemsSold.Location = new Point(51, 22);
+            lblItemsSold.Location = new Point(40, 22);
             lblItemsSold.Name = "lblItemsSold";
             lblItemsSold.Size = new Size(97, 25);
             lblItemsSold.TabIndex = 4;
@@ -278,7 +278,7 @@
             lblLowStock.AutoSize = true;
             lblLowStock.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblLowStock.ForeColor = Color.White;
-            lblLowStock.Location = new Point(50, 22);
+            lblLowStock.Location = new Point(39, 22);
             lblLowStock.Name = "lblLowStock";
             lblLowStock.Size = new Size(104, 25);
             lblLowStock.TabIndex = 3;

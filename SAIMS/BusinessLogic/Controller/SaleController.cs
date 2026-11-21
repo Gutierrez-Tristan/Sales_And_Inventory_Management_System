@@ -23,10 +23,15 @@ namespace SAIMS.BusinessLogic
             if (sale.Discount > sale.Subtotal)
                 return "Discount cannot be more than the subtotal.";
 
-            sale.Total = sale.Subtotal - sale.Discount;
+            sale.Discount = SaleCalculator.DiscountFor(sale.Subtotal, sale.DiscountType);
+            sale.VatRate = SaleCalculator.VatRateFor(sale.DiscountType);
+            var t = SaleCalculator.Compute(sale.Subtotal, sale.Discount, sale.VatRate);
+            sale.VatAmount = t.Vat;
+            sale.Total = t.Total;
+            if (!PaymentTypes.IsCash(sale.PaymentMethod))
+                sale.AmountPaid = sale.Total;
             if (sale.AmountPaid < sale.Total)
                 return "Amount paid is less than the total.";
-
             sale.ChangeAmount = sale.AmountPaid - sale.Total;
 
             try
