@@ -76,6 +76,7 @@
             btnLogout.TabIndex = 22;
             btnLogout.Text = "LOGOUT";
             btnLogout.UseVisualStyleBackColor = false;
+            btnLogout.Click += btnLogout_Click;
             // 
             // btnStockInquiry
             // 

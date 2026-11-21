@@ -167,7 +167,7 @@
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "frmLogin";
-            Text = "Form1";
+            Text = "Login";
             FormClosed += frmLogin_FormClosed;
             Load += Form1_Load;
             panel1.ResumeLayout(false);

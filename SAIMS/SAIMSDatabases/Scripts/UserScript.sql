@@ -194,3 +194,15 @@ WHERE NOT EXISTS (SELECT 1
                   FROM tblSupplierProduct sp
                   WHERE sp.SupplierID = s.SupplierID
                     AND sp.ItemName   = i.ItemName);
+
+IF COL_LENGTH('dbo.tblSale', 'DiscountType') IS NULL
+    ALTER TABLE dbo.tblSale ADD DiscountType NVARCHAR(20) NOT NULL DEFAULT 'None';
+
+IF COL_LENGTH('dbo.tblSale', 'VatRate') IS NULL
+    ALTER TABLE dbo.tblSale ADD VatRate DECIMAL(5,4) NOT NULL DEFAULT 0;
+
+IF COL_LENGTH('dbo.tblSale', 'VatAmount') IS NULL
+    ALTER TABLE dbo.tblSale ADD VatAmount DECIMAL(12,2) NOT NULL DEFAULT 0;
+
+IF COL_LENGTH('dbo.tblSale', 'PaymentMethod') IS NULL
+    ALTER TABLE dbo.tblSale ADD PaymentMethod NVARCHAR(30) NOT NULL DEFAULT 'Cash';

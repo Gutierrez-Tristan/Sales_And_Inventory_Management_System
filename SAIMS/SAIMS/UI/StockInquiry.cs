@@ -118,5 +118,10 @@ namespace SAIMS.UI
             frmTransaction.Show();
             this.Hide();
         }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            SessionHelper.Logout(this);
+        }
     }
 }

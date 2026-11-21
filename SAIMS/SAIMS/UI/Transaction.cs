@@ -104,5 +104,10 @@ namespace SAIMS.UI
             frmStockInquiry.Show();
             this.Hide();
         }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            SessionHelper.Logout(this);
+        }
     }
 }
